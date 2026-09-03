@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # For Docker Desktop (Mac/Windows), use host.docker.internal
+      # For Linux, you may need to use the host's IP address
+      - OLLAMA_HOST=host.docker.internal
+      - MODEL_NAME=${MODEL_NAME:-tinyllama}
+    volumes:
+      # Persist ChromaDB data
+      - ./db:/app/db
